@@ -619,25 +619,42 @@ mytextclock:add_signal("mouse::leave", remove_calendar)
 --    remove_mpd_info()
 --end)
 
-mytextclock:buttons({
-    button({ }, 3, function()
+mytextclock:buttons(awful.util.table.join(
+    awful.button({ }, 3, function()
         add_agenda()
     end),
-    button({ }, 1, function()
+    awful.button({ }, 1, function()
         add_calendar(0)
     end),
-    button({ }, 4, function()
+    awful.button({ }, 4, function()
         add_calendar(-1)
     end),
-    button({ }, 5, function()
+    awful.button({ }, 5, function()
         add_calendar(1)
     end)
-})
+))
 
---mpdwidget:buttons({
---    button({ }, 1, function()
---        add_mpd_info()
---    end)
---})
+mpdwidget:buttons({
+    button({ }, 1, function()
+        add_mpd_info()
+    end)
+})
+mpdwidget:buttons(awful.util.table.join(
+   awful.button({ }, 1, function()
+       os.execute( "mpc prev" )
+   end),
+   awful.button({ }, 2, function()
+       os.execute( "mpc toggle" )
+   end),
+   awful.button({ }, 3, function()
+       os.execute( "mpc next" )
+   end),
+   awful.button({ }, 4, function()
+       os.execute( "mpc volume +5" )
+   end),
+   awful.button({ }, 5, function()
+       os.execute( "mpc volume -5" )
+   end)
+ ))
 
 -- }}}
